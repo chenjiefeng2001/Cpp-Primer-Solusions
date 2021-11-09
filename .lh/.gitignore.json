@@ -1,0 +1,26 @@
+{
+    "sourceFile": ".gitignore",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1636473510131,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1636473640428,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,5 +32,5 @@\n *.app\r\n \r\n #the vscode config floder \r\n ./vscode\r\n-\r\n+./.lh\r\n"
+                },
+                {
+                    "date": 1636473648862,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,4 +33,5 @@\n \r\n #the vscode config floder \r\n ./vscode\r\n ./.lh\r\n+\r\n"
+                }
+            ],
+            "date": 1636473510131,
+            "name": "Commit-0",
+            "content": "# Prerequisites\r\n*.d\r\n\r\n# Compiled Object files\r\n*.slo\r\n*.lo\r\n*.o\r\n*.obj\r\n\r\n# Precompiled Headers\r\n*.gch\r\n*.pch\r\n\r\n# Compiled Dynamic libraries\r\n*.so\r\n*.dylib\r\n*.dll\r\n\r\n# Fortran module files\r\n*.mod\r\n*.smod\r\n\r\n# Compiled Static libraries\r\n*.lai\r\n*.la\r\n*.a\r\n*.lib\r\n\r\n# Executables\r\n*.exe\r\n*.out\r\n*.app\r\n\r\n#the vscode config floder \r\n./vscode\r\n\r\n"
+        }
+    ]
+}

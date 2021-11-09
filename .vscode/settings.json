@@ -1,0 +1,4 @@
+{
+    "C_Cpp.default.configurationProvider": "numaru.vscode-cmake-lite",
+    "FSharp.suggestGitignore": false
+}
