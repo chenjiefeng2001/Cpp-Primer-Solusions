@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 16,
+            "activePatchIndex": 27,
             "patches": [
                 {
                     "date": 1636512269521,
@@ -72,6 +72,50 @@
                 {
                     "date": 1636513412657,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n #include <iostream>\r\n /**\r\n  * \r\n- * \r\n- * @return int \r\n+ * 简单函数\r\n+ * 读取两个函数，求他们的和\r\n  */\r\n int main()\r\n {\r\n     \r\n"
+                },
+                {
+                    "date": 1636513551851,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,6 +5,6 @@\n  * 读取两个函数，求他们的和\r\n  */\r\n int main()\r\n {\r\n-    \r\n+    std::cout<<\"Enter two number是\"\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1636513565141,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,6 +5,7 @@\n  * 读取两个函数，求他们的和\r\n  */\r\n int main()\r\n {\r\n-    std::cout<<\"Enter two number是\"\r\n+    std::cout<<\"Enter two numbers:\"<<std::endl:\r\n+    \r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1636513586152,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,7 +5,8 @@\n  * 读取两个函数，求他们的和\r\n  */\r\n int main()\r\n {\r\n-    std::cout<<\"Enter two numbers:\"<<std::endl:\r\n+    std::cout<<\"Enter two numbers:\"<<std::endl;\r\n+    int var1=0,var2=0;\r\n     \r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1636513620861,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,7 +6,8 @@\n  */\r\n int main()\r\n {\r\n     std::cout<<\"Enter two numbers:\"<<std::endl;\r\n-    int var1=0,var2=0;\r\n+    int var1=0,var2=0;//保存读取的变量\r\n+    std::sin>>var1>>var2;\r\n     \r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1636513658296,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,7 +7,7 @@\n int main()\r\n {\r\n     std::cout<<\"Enter two numbers:\"<<std::endl;\r\n     int var1=0,var2=0;//保存读取的变量\r\n-    std::sin>>var1>>var2;\r\n-    \r\n+    std::cin>>var1>>var2;\r\n+\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1636513670142,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,6 +8,6 @@\n {\r\n     std::cout<<\"Enter two numbers:\"<<std::endl;\r\n     int var1=0,var2=0;//保存读取的变量\r\n     std::cin>>var1>>var2;\r\n-\r\n+    std::cout<<\"The sum of \"\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1636513702290,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,6 +8,6 @@\n {\r\n     std::cout<<\"Enter two numbers:\"<<std::endl;\r\n     int var1=0,var2=0;//保存读取的变量\r\n     std::cin>>var1>>var2;\r\n-    std::cout<<\"The sum of \"\r\n+    std::cout<<\"The sum of \"<<var1<<\" and \"<<var2<<std::endl\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1636513708333,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,6 +8,6 @@\n {\r\n     std::cout<<\"Enter two numbers:\"<<std::endl;\r\n     int var1=0,var2=0;//保存读取的变量\r\n     std::cin>>var1>>var2;\r\n-    std::cout<<\"The sum of \"<<var1<<\" and \"<<var2<<std::endl\r\n+    std::cout<<\"The sum of \"<<var1<<\" and \"<<var2<<<<std::endl\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1636513717748,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,6 +8,6 @@\n {\r\n     std::cout<<\"Enter two numbers:\"<<std::endl;\r\n     int var1=0,var2=0;//保存读取的变量\r\n     std::cin>>var1>>var2;\r\n-    std::cout<<\"The sum of \"<<var1<<\" and \"<<var2<<<<std::endl\r\n+    std::cout<<\"The sum of \"<<var1<<\" and \"<<var2<<\" is \"<<std::endl\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1636513726798,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,6 +8,6 @@\n {\r\n     std::cout<<\"Enter two numbers:\"<<std::endl;\r\n     int var1=0,var2=0;//保存读取的变量\r\n     std::cin>>var1>>var2;\r\n-    std::cout<<\"The sum of \"<<var1<<\" and \"<<var2<<\" is \"<<std::endl\r\n+    std::cout<<\"The sum of \"<<var1<<\" and \"<<var2<<\" is \"<<var1+var2<<std::endl\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1636513745053,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,10 @@\n  * 读取两个函数，求他们的和\r\n  */\r\n int main()\r\n {\r\n-    std::cout<<\"Enter two numbers:\"<<std::endl;\r\n-    int var1=0,var2=0;//保存读取的变量\r\n-    std::cin>>var1>>var2;\r\n-    std::cout<<\"The sum of \"<<var1<<\" and \"<<var2<<\" is \"<<var1+var2<<std::endl\r\n+    std::cout << \"Enter two numbers:\" << std::endl;\r\n+    int var1 = 0, var2 = 0; //保存读取的变量\r\n+    std::cin >> var1 >> var2;\r\n+    std::cout << \"The sum of \" << var1 << \" and \" << var2 << \" is \" << var1 + var2 << std::endl;\r\n+    return 0;\r\n }\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1636512269521,

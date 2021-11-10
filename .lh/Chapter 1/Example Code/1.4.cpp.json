@@ -1,0 +1,26 @@
+{
+    "sourceFile": "Chapter 1/Example Code/1.4.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1636514215974,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1636514217612,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,2 +1,5 @@\n #include <iostream>\r\n-ingt\n\\ No newline at end of file\n+int main()\r\n+{\r\n+    \r\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1636514245619,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,5 @@\n+#include <iostream>\r\n+int main()\r\n+{\r\n+    int sum = 0, var = 1\r\n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1636514215974,
+            "name": "Commit-0",
+            "content": "#include <iostream>\r\nint main()\r\n{\r\n    \r\n}"
+        }
+    ]
+}

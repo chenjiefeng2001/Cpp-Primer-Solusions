@@ -1,0 +1,46 @@
+{
+    "sourceFile": "Chapter 1/1.8.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 7,
+            "patches": [
+                {
+                    "date": 1636513924617,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1636513930882,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,5 @@\n #include <iostream>\r\n+int main()\r\n+{\r\n+    \r\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1636513950565,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n #include <iostream>\r\n int main()\r\n {\r\n-    \r\n+    std::cout<<\"/*\"\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1636513981895,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n #include <iostream>\r\n int main()\r\n {\r\n-    std::cout<<\"/*\"\r\n+    std::cout<<\"/*\";\r\n+    std::cout<<\"*/\";\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1636513989928,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,5 +2,6 @@\n int main()\r\n {\r\n     std::cout<<\"/*\";\r\n     std::cout<<\"*/\";\r\n+    std::cout<<\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1636514018001,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,6 +2,6 @@\n int main()\r\n {\r\n     std::cout<<\"/*\";\r\n     std::cout<<\"*/\";\r\n-    std::cout<<\r\n+    std::cout<</*\"*/\"8?;\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1636514041641,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,9 @@\n #include <iostream>\r\n int main()\r\n {\r\n-    std::cout<<\"/*\";\r\n-    std::cout<<\"*/\";\r\n-    std::cout<</*\"*/\"8?;\r\n+    std::cout << \"/*\";\r\n+    std::cout << \"*/\";\r\n+    std::cout << /*\"*/ \"*/;\r\n+        std::cout\r\n+              <</*\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1636514070163,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,8 @@\n #include <iostream>\r\n int main()\r\n {\r\n-    std::cout << \"/*\";\r\n-    std::cout << \"*/\";\r\n-    std::cout << /*\"*/ \"*/;\r\n-        std::cout\r\n-              <</*\r\n+    std::cout<<\"/*\";\r\n+    std::cout<<\"*/\";\r\n+    std::cout<</*\"*/\"*/;\r\n+    std::cout<</*\"*/\" /* \"/*\" */\r\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1636513924617,
+            "name": "Commit-0",
+            "content": "#include <iostream>\r\n"
+        }
+    ]
+}
