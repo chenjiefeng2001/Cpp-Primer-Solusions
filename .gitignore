@@ -32,6 +32,6 @@
 *.app
 
 #the vscode config floder 
-./vscode
+./.vscode
 ./.lh
 

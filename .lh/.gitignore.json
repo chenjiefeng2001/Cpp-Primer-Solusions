@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 2,
+            "activePatchIndex": 3,
             "patches": [
                 {
                     "date": 1636473510131,
@@ -16,6 +16,10 @@
                 {
                     "date": 1636473648862,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,4 +33,5 @@\n \r\n #the vscode config floder \r\n ./vscode\r\n ./.lh\r\n+\r\n"
+                },
+                {
+                    "date": 1636545432540,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,7 +31,7 @@\n *.out\r\n *.app\r\n \r\n #the vscode config floder \r\n-./vscode\r\n+./.vscode\r\n ./.lh\r\n \r\n"
                 }
             ],
             "date": 1636473510131,
