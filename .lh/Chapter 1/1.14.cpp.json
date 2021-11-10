@@ -1,0 +1,38 @@
+{
+    "sourceFile": "Chapter 1/1.14.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1636524598989,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1636524607481,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,1 @@\n+#include <iostream>\r\n"
+                },
+                {
+                    "date": 1636524619298,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,5 @@\n #include <iostream>\r\n+using namespace std;\r\n+int main()\r\n+{\r\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1636524716327,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,10 @@\n-#include <iostream>\r\n-using namespace std;\r\n-int main()\r\n-{\r\n-}\n\\ No newline at end of file\n+/**\r\n+ * @file 1.14.cpp\r\n+ * @author your name (you@domain.com)\r\n+ * @brief \r\n+ * @version 0.1\r\n+ * @date 2021-11-10\r\n+ * \r\n+ * @copyright Copyright (c) 2021\r\n+ * \r\n+ */\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1636525385778,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,5 @@\n /**\r\n- * @file 1.14.cpp\r\n- * @author your name (you@domain.com)\r\n- * @brief \r\n- * @version 0.1\r\n- * @date 2021-11-10\r\n+ * for 循环可以很快的\r\n  * \r\n- * @copyright Copyright (c) 2021\r\n  * \r\n  */\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1636525464018,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n /**\r\n- * for 循环可以很快的\r\n+ * for 循环可以很快的写出，着重强调循环方式\r\n+ * while循环着重强调满足的条件，并且不要求写出步长之类的\r\n  * \r\n  * \r\n  */\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1636524598989,
+            "name": "Commit-0",
+            "content": ""
+        }
+    ]
+}
