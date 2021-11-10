@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 4,
+            "activePatchIndex": 5,
             "patches": [
                 {
                     "date": 1636515977400,
@@ -24,6 +24,10 @@
                 {
                     "date": 1636516117272,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,12 +3,11 @@\n int main(int argc, char const *argv[])\r\n {\r\n     int sum = 0;\r\n     //从1加到10\r\n-    for (int val = 1;val<= 10.val++)\r\n+    for (int val = 1; val <= 10.val ++)\r\n     {\r\n-        sum+=val;//等价于sum = sum +val\r\n-        std::cout<<\"Sum of 1 to 10 inclusive is \"<<sum<<std::endl;\r\n-        return 0;\r\n+        sum += val; //等价于sum = sum +val\r\n+        std::cout << \"Sum of 1 to 10 inclusive is \" << sum << std::endl;\r\n     }\r\n     return 0;\r\n }\r\n"
+                },
+                {
+                    "date": 1636516618821,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,4 +10,5 @@\n         std::cout << \"Sum of 1 to 10 inclusive is \" << sum << std::endl;\r\n     }\r\n     return 0;\r\n }\r\n+    \n\\ No newline at end of file\n"
                 }
             ],
             "date": 1636515977400,
