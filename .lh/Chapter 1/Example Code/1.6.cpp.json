@@ -1,0 +1,50 @@
+{
+    "sourceFile": "Chapter 1/Example Code/1.6.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 8,
+            "patches": [
+                {
+                    "date": 1636512625168,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1636512635893,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,6 @@\n //error code\r\n #include <iostream>\r\n-using namespace std;\r\n int main()\r\n {\r\n-    \r\n+\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1636512644947,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n //error code\r\n #include <iostream>\r\n int main()\r\n {\r\n-\r\n+    std::coutr<<\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1636512708063,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,8 @@\n //error code\r\n #include <iostream>\r\n int main()\r\n {\r\n-    std::coutr<<\r\n+    std::cout<<\"The sum of \"<<v1;\r\n+            <<\" and\"<<v2;\r\n+            <<\" is \"<<v1+v2<<std::endl;\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1636512716801,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,9 @@\n+//error code\r\n+#include <iostream>\r\n+int main()\r\n+{\r\n+    std::cout<<\"The sum of \"<<v1;\r\n+            <<\" and\"<<v2;\r\n+            <<\" is \"<<v1+v2<<std::endl;\r\n+}\r\n+/*\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1636512797993,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,11 @@\n+//error code\r\n+#include <iostream>\r\n+int main()\r\n+{\r\n+    std::cout<<\"The sum of \"<<v1;\r\n+            <<\" and\"<<v2;\r\n+            <<\" is \"<<v1+v2<<std::endl;\r\n+}\r\n+/*\r\n+*\r\n+*/\r\n"
+                },
+                {
+                    "date": 1636512803415,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,12 @@\n+//error code\r\n+#include <iostream>\r\n+int main()\r\n+{\r\n+    std::cout<<\"The sum of \"<<v1;\r\n+            <<\" and\"<<v2;\r\n+            <<\" is \"<<v1+v2<<std::endl;\r\n+}\r\n+/*\r\n+*\r\n+*\r\n+*/\r\n"
+                },
+                {
+                    "date": 1636512909754,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,12 @@\n+//error code\r\n+#include <iostream>\r\n+int main()\r\n+{\r\n+    std::cout<<\"The sum of \"<<v1;\r\n+            <<\" and\"<<v2;\r\n+            <<\" is \"<<v1+v2<<std::endl;\r\n+}\r\n+/*\r\n+* 这个程序是非法的，因为分隔符的使用不正确，应该只在最后的endl末尾加分号\r\n+*\r\n+*/\r\n"
+                },
+                {
+                    "date": 1636513068741,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,44 +9,4 @@\n /*\r\n * 这个程序是非法的，因为分隔符的使用不正确，应该只在最后的endl末尾加分号\r\n *\r\n */\r\n-//error code\r\n-#include <iostream>\r\n-int main()\r\n-{\r\n-    std::cout<<\"The sum of \"<<v1;\r\n-            <<\" and\"<<v2;\r\n-            <<\" is \"<<v1+v2<<std::endl;\r\n-}\r\n-/*\r\n-*\r\n-*\r\n-*/\r\n-//error code\r\n-#include <iostream>\r\n-int main()\r\n-{\r\n-    std::cout<<\"The sum of \"<<v1;\r\n-            <<\" and\"<<v2;\r\n-            <<\" is \"<<v1+v2<<std::endl;\r\n-}\r\n-/*\r\n-*\r\n-*/\r\n-//error code\r\n-#include <iostream>\r\n-int main()\r\n-{\r\n-    std::cout<<\"The sum of \"<<v1;\r\n-            <<\" and\"<<v2;\r\n-            <<\" is \"<<v1+v2<<std::endl;\r\n-}\r\n-/*\n-//error code\r\n-#include <iostream>\r\n-int main()\r\n-{\r\n-    std::cout<<\"The sum of \"<<v1;\r\n-            <<\" and\"<<v2;\r\n-            <<\" is \"<<v1+v2<<std::endl;\r\n-}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1636512625168,
+            "name": "Commit-0",
+            "content": "//error code\r\n#include <iostream>\r\nusing namespace std;\r\nint main()\r\n{\r\n    \r\n}"
+        }
+    ]
+}
