@@ -1,0 +1,26 @@
+{
+    "sourceFile": "Chapter 1/exercise/1.16.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1636534208288,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1636536418451,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n #include <iostream>\r\n int main()\r\n {\r\n \r\n-    while ()\r\n+    while (std::cin>>)\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1636536436025,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,6 @@\n+#include <iostream>\r\n+int main()\r\n+{\r\n+    int value =0;\r\n+    while (std::cin>>)\r\n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1636534208288,
+            "name": "Commit-0",
+            "content": "#include <iostream>\r\nint main()\r\n{\r\n    \r\n}"
+        }
+    ]
+}

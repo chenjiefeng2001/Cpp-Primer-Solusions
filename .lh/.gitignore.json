@@ -3,7 +3,11 @@
     "activeCommit": 0,
     "commits": [
         {
+<<<<<<< HEAD
             "activePatchIndex": 5,
+=======
+            "activePatchIndex": 3,
+>>>>>>> 28a7d38 (update)
             "patches": [
                 {
                     "date": 1636473510131,
@@ -18,6 +22,7 @@
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,4 +33,5 @@\n \r\n #the vscode config floder \r\n ./vscode\r\n ./.lh\r\n+\r\n"
                 },
                 {
+<<<<<<< HEAD
                     "date": 1636601234853,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,37 +1,37 @@\n-# Prerequisites\r\n-*.d\r\n-\r\n-# Compiled Object files\r\n-*.slo\r\n-*.lo\r\n-*.o\r\n-*.obj\r\n-\r\n-# Precompiled Headers\r\n-*.gch\r\n-*.pch\r\n-\r\n-# Compiled Dynamic libraries\r\n-*.so\r\n-*.dylib\r\n-*.dll\r\n-\r\n-# Fortran module files\r\n-*.mod\r\n-*.smod\r\n-\r\n-# Compiled Static libraries\r\n-*.lai\r\n-*.la\r\n-*.a\r\n-*.lib\r\n-\r\n-# Executables\r\n-*.exe\r\n-*.out\r\n-*.app\r\n-\r\n-#the vscode config floder \r\n-./vscode\r\n-./.lh\r\n-\r\n+# Prerequisites\n+*.d\n+\n+# Compiled Object files\n+*.slo\n+*.lo\n+*.o\n+*.obj\n+\n+# Precompiled Headers\n+*.gch\n+*.pch\n+\n+# Compiled Dynamic libraries\n+*.so\n+*.dylib\n+*.dll\n+\n+# Fortran module files\n+*.mod\n+*.smod\n+\n+# Compiled Static libraries\n+*.lai\n+*.la\n+*.a\n+*.lib\n+\n+# Executables\n+*.exe\n+*.out\n+*.app\n+\n+#the vscode config floder \n+./.vscode\n+./.lh\n+\n"
                 },
@@ -28,6 +33,10 @@
                 {
                     "date": 1636601399554,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n *.a\n *.lib\n \n #the Config files\n-*.json\n+*.cpp.json\n \n \n # Executables\n *.exe\n"
+=======
+                    "date": 1636545432540,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,7 +31,7 @@\n *.out\r\n *.app\r\n \r\n #the vscode config floder \r\n-./vscode\r\n+./.vscode\r\n ./.lh\r\n \r\n"
+>>>>>>> 28a7d38 (update)
                 }
             ],
             "date": 1636473510131,
