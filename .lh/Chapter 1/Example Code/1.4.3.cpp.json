@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 4,
+            "activePatchIndex": 5,
             "patches": [
                 {
                     "date": 1636525496719,
@@ -24,6 +24,10 @@
                 {
                     "date": 1636525580932,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,11 @@\n #include <iostream>\r\n int main()\r\n {\r\n     int sum = 0, value = 0;\r\n-    while (std::sin>>value)\r\n+    while (std::sin >> value)\r\n     {\r\n-        sum+=value;\r\n-        std::cout<<\"Sum is :\"<<sum<<std::enld;\r\n-        \r\n+        sum += value;\r\n+        std::cout << \"Sum is :\" << sum << std::endl;\r\n     }\r\n     return 0;\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1636550597165,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n #include <iostream>\r\n int main()\r\n {\r\n     int sum = 0, value = 0;\r\n-    while (std::sin >> value)\r\n+    while (std::cin >> value)\r\n     {\r\n         sum += value;\r\n         std::cout << \"Sum is :\" << sum << std::endl;\r\n     }\r\n"
                 }
             ],
             "date": 1636525496719,
