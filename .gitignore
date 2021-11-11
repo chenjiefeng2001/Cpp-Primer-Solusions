@@ -26,6 +26,10 @@
 *.a
 *.lib
 
+#the Config files
+*.cpp.json
+
+
 # Executables
 *.exe
 *.out
