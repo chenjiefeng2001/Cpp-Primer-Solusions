@@ -1,3 +1,8 @@
 {
-    "FSharp.suggestGitignore": false
+    "FSharp.suggestGitignore": false,
+    "files.associations": {
+        "*.ss": "scheme",
+        "xstring": "cpp",
+        "xutility": "cpp"
+    }
 }
