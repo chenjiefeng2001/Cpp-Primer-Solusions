@@ -8,7 +8,7 @@ int main()
     string s("some arting");
     if (s.begin() != s.end())//判断首尾容器是否是相同，来确定是否非空
         auto it =s.end();
-        *it = toupper(*it)//指向末尾元素
+        *it = toupper(*it);//指向末尾元素
         return 0;
 }
 /**
