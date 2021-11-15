@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 2,
+            "activePatchIndex": 3,
             "patches": [
                 {
                     "date": 1636536555185,
@@ -16,6 +16,10 @@
                 {
                     "date": 1636904836740,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n             \"args\": [],\r\n             \"stopAtEntry\": false,\r\n             \"cwd\": \"C:\\\\Program Files\\\\mingw-w64\\\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\\\mingw64\\\\bin\",\r\n             \"environment\": [],\r\n-            \"externalConsole\": true,\r\n+            \"externalConsole\": false,\r\n             \"MIMode\": \"gdb\",\r\n             \"miDebuggerPath\": \"C:\\\\Program Files\\\\mingw-w64\\\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\\\mingw64\\\\bin\\\\gdb.exe\",\r\n             \"setupCommands\": [\r\n                 {\r\n"
+                },
+                {
+                    "date": 1636947169244,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n             \"args\": [],\r\n             \"stopAtEntry\": false,\r\n             \"cwd\": \"C:\\\\Program Files\\\\mingw-w64\\\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\\\mingw64\\\\bin\",\r\n             \"environment\": [],\r\n-            \"externalConsole\": false,\r\n+            \"externalConsole\": true,\r\n             \"MIMode\": \"gdb\",\r\n             \"miDebuggerPath\": \"C:\\\\Program Files\\\\mingw-w64\\\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\\\mingw64\\\\bin\\\\gdb.exe\",\r\n             \"setupCommands\": [\r\n                 {\r\n"
                 }
             ],
             "date": 1636536555185,
