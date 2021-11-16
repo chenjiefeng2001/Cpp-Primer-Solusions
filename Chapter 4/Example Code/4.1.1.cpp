@@ -12,5 +12,6 @@ int main()
     cout << (6 + 3) * (4 / 2 + 2) << endl;
     cout << ((6 + 3) * 4) / 2 + 2 << endl;
     cout << 6 + 3 * 4 / (2 + 2) << endl;
+    
     return 0;
 }
