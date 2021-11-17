@@ -19,7 +19,14 @@ int fact(int val)
 
 int main()
 {
+    //
     int j = fact(5);
     cout << "5! is " << j << endl;
     return 0;
 }
+/**
+ * 函数形参列表
+ * void f1(){}      隐式地定义空形参列表
+ * void f2(void){}     显式地定义形参列表
+ */
+
