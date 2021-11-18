@@ -19,6 +19,7 @@ int main()
             cin >> c;
             if (!cin || c == 'n')
                 break;
-            
+
         }
 }
+
