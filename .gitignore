@@ -38,9 +38,6 @@
 *.app
 
 #the vscode config floder 
-./.vscode/
-./.lh/
+.vscode
 ./*/.src/
-Cpp_solusions.code-workspace
-.vscode/launch.json
-
+*.code-workspace
