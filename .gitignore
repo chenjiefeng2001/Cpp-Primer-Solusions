@@ -25,6 +25,7 @@
 *.la
 *.a
 *.lib
+*.exe
 
 #the Config files
 *.cpp.json
