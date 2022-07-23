@@ -30,7 +30,7 @@
 #the Config files
 *.cpp
 *.json
-
+*.code-workspace
 
 # Executables
 *.exe
@@ -38,7 +38,6 @@
 *.app
 
 #the vscode config floder 
-./.vscode
-./.lh
-.vscode/launch.json
-./*/.src
+./.vscode/
+./.lh/
+./*/.src/
