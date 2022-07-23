@@ -1,7 +1,0 @@
-make.exe --dry-run --always-make --keep-going --print-directory
-make.exe: Entering directory 'e:/Git/C++ Primer'
- 
-make.exe: *** No targets specified and no makefile found.  Stop.
-
-make.exe: Leaving directory 'e:/Git/C++ Primer'
- 
