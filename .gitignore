@@ -28,7 +28,6 @@
 *.exe
 
 #the Config files
-*.cpp
 *.json
 *.code-workspace
 
@@ -40,5 +39,5 @@
 #the vscode config floder 
 .vscode
 ./*/.src/
-*.code-workspace
-Cpp_solusions.code-workspace
+
+
