@@ -15,11 +15,28 @@ public:
     ~Screen();
     Screen &set(char);
     Screen &set(pos r, pos col, char ch);
-
+    //根据对象是否是const重载了display函数
+    Screen &display(std::ostream &os)
+    {
+        do_display(os);
+        return *this;
+    }
+    const Screen &display(std::ostream &os) const
+    {
+        do_display(os);
+        return *this;
+    }
+    /**
+     * @brief 为什么单独定义一个do_display函数而不是直接调用display函数
+     * - 易于后期的修改，以及当类扩展时，方便进行调用
+     * - 避免在多处都使用同一份代码，这样会造成程序的臃肿
+     * - 这样不会有任何的开销
+     */
 private:
     pos cursor = 0;
     pos height = 0, width = 0;
     std::string contents;
+    void do_display(std::ostream &os) const { os << contents; }
 };
 class Window_mgr
 // window_mgr 的作用是追踪Screen
@@ -62,9 +79,6 @@ char Screen::get(pos r, pos c) const //在类的内部声明成inline
     pos row = r * width;
     return contents[row + c];
 }
-Screen::Screen(/* args */)
-{
-}
 
 Screen::~Screen()
 {
@@ -72,5 +86,23 @@ Screen::~Screen()
 
 int main()
 {
+    // Screen myscreen;
+    // myscreen.move(4, 0).set('#');
+    // return 0;
+    Screen Screen(5, 3, 'X');
+    Screen.move(4, 0).set('#').display(cout);
+    cout << "\n";
+    Screen.display(cout);
+    cout << "\n";
+
     return 0;
 }
+/**
+ * @brief 类的声明
+ * 类的声明有两种，一种为前向声明，即仅仅声明类而暂时不定义它，而这种在未定义前的状态是一种不完全声明。
+ * 使用场景：可以定义指向这种类型的指针或者引用，也可以声明以不完全类型作为参数或者返回类型的函数
+ * 另一种就是完全声明，即定义和声明在一起的，这种也称为完全声明
+ * 
+ * 类之间的友元关系
+ * 
+ */

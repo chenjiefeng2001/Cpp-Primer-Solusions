@@ -41,7 +41,7 @@ Sales_data::~Sales_data()
 {
 }
 /**
- * @brief 
+ * @brief
  *  封装的两个重要优点；
  * - 确保用户代码不会无意间破坏封装对象的状态
  * - 被封装的类的具体实现细节可以随时改变，而无需调整用户级别的代码。
@@ -49,4 +49,5 @@ Sales_data::~Sales_data()
 using namespace std;
 int main()
 {
+    Screen myscreen;
 }
