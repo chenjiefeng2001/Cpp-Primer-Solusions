@@ -48,6 +48,9 @@
  * s.rdstate()      返回流s的当前状态，返回值类型为strm::iostate
  */
 
+/** @brief 管理条件状态 
+ * 流对象的rdstate成员返回一个
+ */
 int main(int argc, char const *argv[])
 {
     printf("hello world");
