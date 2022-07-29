@@ -1,5 +1,6 @@
 // IO标准库
 #include <iostream>
+using namespace std;
 /**
  * @brief
  * - istream (输入流)类型，提供输入操作
@@ -48,11 +49,31 @@
  * s.rdstate()      返回流s的当前状态，返回值类型为strm::iostate
  */
 
-/** @brief 管理条件状态 
- * 流对象的rdstate成员返回一个
+/** @brief 管理条件状态
+ * 流对象的rdstate成员返回一个iostate值，对应流的当前状态，setstate操作将给定条件位置位，表示发生了对应的错误。
+ * clear成员是一个重载的成员：它有一个不接受参数的版本，而另一个版本接受一个iostate类型的参数
  */
 int main(int argc, char const *argv[])
 {
     printf("hello world");
+    cout << "hi!" << endl;  //输出hi和一个换行，然后刷新缓冲区
+    cout << "hi!" << flush; //输出hi，然后刷新缓冲区，不附加任何额外字符
+    cout << "hi!" << ends;  //输出hi和一个空字符，然后刷新缓冲区
+    /**
+     * @brief unitbuf 操纵符
+     * 如果想在每次输出操作后都刷新缓冲区，可以使用unitbuf操纵符
+     *
+     */
+    cout << unitbuf; //所有输出操作后都会立刻刷新缓冲区
+    cout << nounitbuf;//回到正常的缓冲方式
+    /**
+     * @brief 关联输入和输出流
+     * 当一个输入流被关联到一个输出流时，任何试图从输入流读取数据的操作都会先刷新关联的输出流。
+     * 交互式系统通常应该关联输入流和输出流。这意味着所有的输出，包括用户提示的信息，都会在读操作之前被打印出来
+     */
+    /** @brief tie
+     * tie有两个版本，一个是不带参数，返回指向输出流的指针。如果本对象当前关联到一个输出流，则返回的就是指向这个流的指针，如果对象未关联到流，则返回空指针。
+     * 第二个版本接受一个指向ostream的指针，将自己关联到此ostream
+     */
     return 0;
 }
