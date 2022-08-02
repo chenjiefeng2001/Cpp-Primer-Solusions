@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <list>
+#include <deque>
+#include <forward_list>
 using namespace std;
 /**
  * @brief 迭代器测试
@@ -35,9 +37,46 @@ int main(int argc, char const *argv[])
     //     ++begin;
     // }
     // iter是通过list<string>定义的一个迭代器类型
+    /**
+     * @brief 容器定义和初始化
+     * 每个容器类型都定义了一个默认构造函数。除了array之外，其他容器的默认构造函数都会创建一个指定类型的空容器，且都可以接受指定容器大小和元素的初始值参数
+     * 容器定义和初始化
+     * C c;             默认构造函数。如果C是一个array，则c中元素按默认方式初始化；否则c为空
+     * C c1(c2);        c1初始化为c2的拷贝。c1和c2必须是相同的类型(若对于array，则还必须拥有相同的大小)
+     * C c{a,b,c...}    c初始化为初始化列表中元素的拷贝。列表中元素的类型必须与C的元素类型相容。对于array类型，列表中的元素数目必须等于或者小于array的大小，任何遗漏的元素都可能直接进行值初始化
+     * C c(b,e)         c初始化为迭代器b和e指定范围中的元素的拷贝。范围中元素的类型必须与C的元素类型相容
+     * 
+     * 只有顺序容器的构造函数才能接受大小参数
+     * C seq(n)     seq包含n个元素，这些元素进行了值初始化；此构造函数是explicit的
+     * C seq(n,t)   seq包含n个初始化为值t的元素
+     */
+    //将一个容器初始化为另一个容器的拷贝
+    list<string> authors={"Millton","Shakespeare","Austen"};
+    vector<const char*>articles={"a","an","the"};
+    list<string> list2(authors);//类型匹配，所以可以正确初始化
+    // deque<string> authlist(authors);    //类型不匹配
+    // vector<string> words(articles);     //类型不匹配
+    forward_list<string> words(articles.begin(),articles.end());    //可以将const char*元素转换为string
+    //当将一个容器初始化为另一个容器的拷贝时，两个容器的容器类型和元素类型都必须相同
+    // deque<string> authlist(authors.begin(),it);//拷贝元素，直到（但不包括）it指向的元素
+
+    //列表初始化
+    //在新标准中，我们可以对一个容器进行列表初始化，当这样做时，我们就显式地指定了容器中每个元素的值。对于除array之外的容器类型，初始化列表还隐含
+    //地指定了容器的大小:  容器将包含与初始值一样多的元素
     list<string>::iterator iter;
     //count是通过vector<int>定义的一个difference_type类型
     vector<int>::difference_type count;
     
-    return 0;
+    //与顺序容器大小相关的构造函数
+    /**
+     * @brief 除了与关联容器相同的构造函数外，顺序容器还提供另一个构造函数，它接受一个容器大小和一个（可选的）元素初始值
+     * 如果我们不提供元素初始值，则标准库会创建一个初始化容器
+     */
+    vector<int> ivec(10,-1);        //10个int元素，每个都初始化为-1
+    list<string> svec(10,"hi!");    //10个strings;每个都初始化为"hi"
+    forward_list<int> ivec(10);     //10个元素，每个都初始化为0
+    deque<string> svec(10);         //10个元素，每个都是空string
+    //只有顺序容器才的构造函数才能接受大小参数，关联容器并不支持
+    
+    return 0;   
 }
