@@ -1,6 +1,7 @@
 #include <iostream>
 #include <algorithm>
 #include <list>
+#include <vector>
 //使用头文件memory
 #include <memory>
 using namespace std;
@@ -27,6 +28,11 @@ shared_ptr<list<int>> p2; // shared_ptr，可以指向int的list
 //在默认初始化中每个智能指针中都会保存有一个空指针
 //智能指针与普通指针使用方式类似。解引用一个智能指针返回它所指向的对象。如果在一个条件判断中使用
 //智能指针，则可以检测是否为空指针
+struct Foo
+{
+    /* data */
+};
+
 int main()
 {
     if (p1 && p1->empty())
@@ -44,6 +50,48 @@ int main()
      *
      * shared_ptr独有的操作
      * make_shared<T>(args)     返回一个shared_ptr,指向一个动态分配的对象。使用args初始化对象
-     *
+     * shared_ptr<T>p(q)        p是一个shared_ptr q的拷贝；此操作会递增q中的计数器。q中的指针必须能转换为T*
+     * p=q                      p和q都是shared_ptr，所保存的指针必须能够互相转换。此操作会递减p的引用计数，递增q的引用计数；若p的引用计数变为0，则会将其管理的原内存释放
+     * p.unique()               若p.use_count()为1，返回true，否则返回false
+     * p.use_count()            返回与p共享对象的智能指针的数量；(主要用于调试，不建议用在release上，因为实在是太慢了)
      */
+    //指向一个值为42的int的shared_ptr
+    shared_ptr<int> p3 = make_shared<int>(42);
+    // p4指向一个值为"9999999"的string
+    shared_ptr<string> p4 = make_shared<string>(10, '9');
+    // p5指向一个值初始化的int
+    shared_ptr<int> p5 = make_shared<int>();
+    // p6指向一个动态分配的空vector<string>
+    auto p6 = make_shared<vector<string>>();
+    // shared_ptr 的拷贝和赋值
+    /**
+     * 当进行拷贝或者赋值操作时，每个shared_ptr都会记录有多少个其他shared_ptr
+     * 指向相同的对象
+     */
+    auto p = make_shared<int>(42);
+    auto q(p); // p和q都指向相同的对象，此对象有两个引用者
+    //递增引用计数器的方法:
+    /**
+     * - 用一个shared_ptr去初始化另一个shared_ptr
+     * - 将它作为参数传递给一个函数
+     * 作为参数的返回值
+     */
+    //当一个shared_ptr的引用计数器变为0，则自动释放指向的对象
+    auto r = make_shared<int>(42); // r指向的int只有一个引用者
+    r = q;                         //给r赋值，令它指向另一个地址
+                                   //递增q指向的对象的引用计数
+                                   //递减r原来指向的对象的引用计数
+                                   // r原来指向的对象已经没有引用者，所以会自动释放
+    //到底是一个计数器还是其他数据结构来记录有多少指针共享对象，完全由标准库的具体实现来决定，这并不是重点，关键是
+    //是智能指针类能记录有多少个shared_ptr指向相同的对象，并能够在恰当的时候自动释放对象
+
+    // shared_ptr自动销毁所管理的对象
+    // factory返回一个shared_ptr，指向一个动态分配的对象
+    shared_ptr<Foo> factory(T arg)
+    {
+        //恰当地处理arg
+        // shared_ptr 负责释放内存
+        return make_shared<Foo>(arg)
+    }
+    return 0;
 }
