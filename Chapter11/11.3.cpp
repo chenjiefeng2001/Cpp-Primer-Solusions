@@ -18,20 +18,21 @@ set<string>::key_type v2;         // v2是一个string
 map<string, int>::value_type v3;  // v2是一个pair<const string,int>
 map<string, int>::key_type v4;    // v4是一个string
 map<string, int>::mapped_type v5; // v5是一个int
-void woed_transform(ifstream &map_file, ifstream &input)
-{
-    auto trans_map = buildMap(map_file);
-    string text;
-    while (getline(input, text))
-    {
-        istringstream stream(text);
-        
-    }
-}
+// void woed_transform(ifstream &map_file, ifstream &input)
+// {
+//     auto trans_map = buildMap(map_file);
+//     string text;
+//     while (getline(input, text))
+//     {
+//         istringstream stream(text);
+
+//     }
+// }
 /**
  * 与顺序容器一样，我们使用作用域运算符来提取一个类型的成员
  * 只有map类型(unordered_map,unordered_multimap,multimap和map)才定义了mapped_type
  */
+
 int main()
 {
     map<string, int> word_count;
@@ -210,5 +211,6 @@ int main()
      *
      *
      */
+
     return 0;
 }
