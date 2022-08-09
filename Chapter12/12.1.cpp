@@ -4,6 +4,7 @@
 #include <vector>
 //使用头文件memory
 #include <memory>
+#include <string>
 using namespace std;
 /**
  * @brief 动态内存
@@ -28,11 +29,65 @@ shared_ptr<list<int>> p2; // shared_ptr，可以指向int的list
 //在默认初始化中每个智能指针中都会保存有一个空指针
 //智能指针与普通指针使用方式类似。解引用一个智能指针返回它所指向的对象。如果在一个条件判断中使用
 //智能指针，则可以检测是否为空指针
-struct Foo
+class StrBlob
 {
-    /* data */
+public:
+    typedef std::vector<std::string>::size_type size_type;
+    StrBlob(/* args */);
+    StrBlob(std::initializer_list<std::string> il);
+    size_type size() const { return data->size(); }
+    bool empty() const { return data->empty(); }
+    void push_back(const std::string &t) { data->push_back(t); }
+    void pop_back();
+    std::string &front();
+    std::string &back();
+    ~StrBlob();
+
+private:
+    std::shared_ptr<std::vector<std::string>> data;
+    //如果data[i]不合法，则抛出一个异常
+    void check(size_type i, const std::string &msg) const;
 };
 
+StrBlob::StrBlob(/* args */) : data(make_shared<vector<string>>())
+{
+}
+StrBlob::StrBlob(initializer_list<string>(il)) : data(make_shared<vector<string>>(il))
+{
+}
+StrBlob::~StrBlob()
+{
+}
+
+void StrBlob::check(size_type i, const string &msg) const
+{
+    if (i >= data->size())
+        throw out_of_range(msg);
+}
+string &StrBlob::front()
+{
+    //如果vector为空，check会抛出一个异常·1
+    check(0, "front on empty StrBlob");
+    return data->front();
+}
+string &StrBlob::back()
+{
+    check(0, "back on the empty StrBlob");
+    return data->back();
+}
+void StrBlob::pop_back()
+{
+    check(0, "pop_back on empty StrBlob");
+    data->pop_back();
+}
+// data(make_shared<vector<string>>(il));
+// {
+//     /* data */
+// };
+// vector<string> v1;
+// {
+//     vector<string> v2 = {"a", "an", "the"};
+// }
 int main()
 {
     if (p1 && p1->empty())
@@ -82,16 +137,37 @@ int main()
                                    //递增q指向的对象的引用计数
                                    //递减r原来指向的对象的引用计数
                                    // r原来指向的对象已经没有引用者，所以会自动释放
-    //到底是一个计数器还是其他数据结构来记录有多少指针共享对象，完全由标准库的具体实现来决定，这并不是重点，关键是
-    //是智能指针类能记录有多少个shared_ptr指向相同的对象，并能够在恰当的时候自动释放对象
-
+                                   //到底是一个计数器还是其他数据结构来记录有多少指针共享对象，完全由标准库的具体实现来决定，这并不是重点，关键是
+                                   //是智能指针类能记录有多少个shared_ptr指向相同的对象，并能够在恰当的时候自动释放对象
     // shared_ptr自动销毁所管理的对象
     // factory返回一个shared_ptr，指向一个动态分配的对象
-    shared_ptr<Foo> factory(T arg)
-    {
-        //恰当地处理arg
-        // shared_ptr 负责释放内存
-        return make_shared<Foo>(arg)
-    }
+    // shared_ptr<Foo> factory(T arg)
+    // {
+    //     //恰当地处理arg
+    //     // shared_ptr 负责释放内存
+    //     return make_shared<Foo>(arg)
+    // }
+    /**
+     * @brief shared_ptr自动摧毁所管理的对象
+     * 当指向一个对象的最后一个shared_ptr被摧毁时，shared_ptr类会自动销毁此对象。(这是通过析构函数来完成的)
+     * 析构函数通常用来释放对象所分配的资源
+     * shared_ptr的析构函数会递减它所指向的对象的引用计数。当变为0时就会释放
+     *
+     * 当然，他也会自动释放相关联的内存，当该对象不再使用时，shared_ptr会自动释放所占的对象
+     * 由于在最后一个shared_ptr销毁内存之前都不会释放，所以应该保证shared_ptr在无用之后不再保留就非常重要了。
+     * 如果你忘记销毁程序不再需要的shared_ptr，程序仍会正确执行，但是内存会被浪费掉
+     *
+     * shared_ptr在无用之后仍然保留的一种情况:
+     * 你将shared_ptr存放在一个容器中，随后重排了容器，从而不再需要某些元素。在这种情况下，你应该确保用erase删除那些不再需要的shared_ptr元素
+     */
+
+    /**
+     * @brief 使用了动态生存期的资源的类
+     * 使用原因：
+     * - 程序不知道自己需要使用多少对象
+     * - 程序不知道所需对象的准确类型
+     * - 程序需要在多个对象之间共享数据
+     */
+
     return 0;
 }
