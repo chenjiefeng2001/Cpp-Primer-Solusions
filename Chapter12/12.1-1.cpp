@@ -7,6 +7,84 @@
 #include <string>
 
 using namespace std;
+class StrBlob
+{
+public:
+    typedef std::vector<std::string>::size_type size_type;
+    StrBlob(/* args */);
+    StrBlob(std::initializer_list<std::string> il);
+    size_type size() const { return data->size(); }
+    bool empty() const { return data->empty(); }
+    void push_back(const std::string &t) { data->push_back(t); }
+    void pop_back();
+    std::string &front();
+    std::string &back();
+    ~StrBlob();
+
+private:
+    std::shared_ptr<std::vector<std::string>> data;
+    //如果data[i]不合法，则抛出一个异常
+    void check(size_type i, const std::string &msg) const;
+};
+
+StrBlob::StrBlob(/* args */) : data(make_shared<vector<string>>())
+{
+}
+StrBlob::StrBlob(initializer_list<string>(il)) : data(make_shared<vector<string>>(il))
+{
+}
+StrBlob::~StrBlob()
+{
+}
+
+void StrBlob::check(size_type i, const string &msg) const
+{
+    if (i >= data->size())
+        throw out_of_range(msg);
+}
+string &StrBlob::front()
+{
+    //如果vector为空，check会抛出一个异常·1
+    check(0, "front on empty StrBlob");
+    return data->front();
+}
+string &StrBlob::back()
+{
+    check(0, "back on the empty StrBlob");
+    return data->back();
+}
+void StrBlob::pop_back()
+{
+    check(0, "pop_back on empty StrBlob");
+    data->pop_back();
+}
+// data(make_shared<vector<string>>(il));
+// {
+//     /* data */
+// };
+// vector<string> v1;
+// {
+//     vector<string> v2 = {"a", "an", "the"};
+// }
+
+struct Foo
+{
+public:
+    Foo() = default;
+};
+
+class StrBlobPtr
+{
+public:
+    StrBlobPtr();
+    StrBlobPtr(StrBlob &a, size_t sz = 0) : wptr(a.data), curr(sz) {}
+    std::string &deref() const;
+    StrBlobPtr &incr(); //前缀递增
+private:
+    std::shared_ptr<std::vector<std::string>> check(std::size_t, const std::string &) const;
+    std::weak_ptr<std::vector<std::string>> wptr;
+    std::size_t curr;
+};
 /**
  * @brief unique_ptr
  * 一个unique_ptr“拥有”它所指向的对象，与shared_ptr不同，某个时刻只能有一个unique_ptr指向一个给定的对象
@@ -15,7 +93,9 @@ using namespace std;
  * 的指针上
  *
  */
-unique_ptr<int> p1;                  //可以指向一个int的unique_ptr
+
+unique_ptr<int>
+    p1;                              //可以指向一个int的unique_ptr
 unique_ptr<int> ptest2(new int(42)); // p2指向一个值为42
 unique_ptr<string> ptest(new string("Stegosaurus"));
 /**
@@ -52,6 +132,25 @@ int main()
     /**
      * @brief weak_ptr
      * weak_ptr是一种不控制所指向的对象的生存周期地智能指针，它指向由一个shared_ptr管理的对象。
-     * 将一个weak_ptr绑定到一个shared_ptr不会改变shared_ptr的引用计数
+     * 将一个weak_ptr绑定到一个shared_ptr不会改变shared_ptr的引用计数。一旦最后一个指向对象的shared_ptr被销毁，对象就会被释放，而
+     * 即使有weak_ptr指向对象，对象也还是会被释放
      */
+    /**
+     * @brief weak_ptr操作
+     * weak_ptr<T>  w       空weak_ptr可以指向类型为T的对象
+     * weak_ptr<T> w(sp)    与shared_ptr sp指向相同对象的weak_ptr。T必须能转换为sp指向的类型
+     * w=p                  p可以是一个shared_ptr或者是一个shared_ptr。赋值后w与p共享一个对象
+     * w.reset()            将w置为空
+     * w.use_count()        与w共享对象的shared_ptr的数量
+     * w.expired()          若w.use_count()为0,返回true，否则返回false
+     * w.lock()             如果expired为true，返回一个空的shared_ptr，否则返回一个指向w的对象的shared_ptr
+     */
+    auto p = make_shared<int>(42);
+    weak_ptr<int> wp(p); // wp弱共享p;p的引用计数不变
+    //由于不能确保weak_ptr所指向的对象是否还存在，因此需要使用到lock()来检查
+    if (shared_ptr<int> np = wp.lock()) //如果
+    {
+        //在if中，np与p共享对象
+    }
+    //检查指针类
 }
