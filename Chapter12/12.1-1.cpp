@@ -20,7 +20,8 @@ unique_ptr<int> ptest2(new int(42)); // p2指向一个值为42
 unique_ptr<string> ptest(new string("Stegosaurus"));
 /**
  * @brief 删除器
- * 默认情况下，shared_ptr假定它们指向的是动态内存。因此当一个shared_ptr
+ * 默认情况下，shared_ptr假定它们指向的是动态内存。因此当一个shared_ptr被销毁时，它默认地对它管理的指针进行delete操作。为了用shared_ptr来管理一个connection 我们必须写一个函数来管理
+ * 而这个函数就叫做删除器
  */
 //由于一个unique_ptr拥有它所指向的对象，因此unique_ptr不支持普通的拷贝或者赋值操作
 /**
@@ -48,4 +49,9 @@ int main()
     // reset释放了
     p2.reset(p3.release());
     // release成员返回unique_ptr当前保存的指针并将其置为空。因此，p2被初始化为p1原来保存的指针，而p1被置为空
+    /**
+     * @brief weak_ptr
+     * weak_ptr是一种不控制所指向的对象的生存周期地智能指针，它指向由一个shared_ptr管理的对象。
+     * 将一个weak_ptr绑定到一个shared_ptr不会改变shared_ptr的引用计数
+     */
 }
