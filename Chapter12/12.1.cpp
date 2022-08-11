@@ -24,11 +24,13 @@ using namespace std;
  * - unique_ptr则"独占"所指向的对象
  * 除了这两种之外，还定义了一个weak_ptr对象，它是一种弱引用，指向shared_ptr所管理的对象
  */
+
 shared_ptr<string> p1;    // shared_ptr，可以指向string
 shared_ptr<list<int>> p2; // shared_ptr，可以指向int的list
 //在默认初始化中每个智能指针中都会保存有一个空指针
 //智能指针与普通指针使用方式类似。解引用一个智能指针返回它所指向的对象。如果在一个条件判断中使用
 //智能指针，则可以检测是否为空指针
+
 class StrBlob
 {
 public:
@@ -88,6 +90,52 @@ void StrBlob::pop_back()
 // {
 //     vector<string> v2 = {"a", "an", "the"};
 // }
+
+struct Foo
+{
+public:
+    Foo() = default;
+};
+
+void contest(int *args)
+{
+    /**
+     * @brief 指针值和delete
+     * 传递给delete的指针必须指向动态分配的内存，或者是一个空指针
+     * delete会释放一块而非new分配的内存，或者将相同的指针值释放多次，其行为是未定义的
+     */
+
+    int i, *pi1 = &i, *pi2 = nullptr;
+    double *pd = new double(33), *pd2 = pd;
+    // delete i; //错误，并非为完整的指针
+    delete pi1; //未定义:pi1指向一个局部变量
+    delete pd;  //正确
+    delete pd2; //未定义:pd2指向的内存已经被释放了
+    delete pi2; //正确，pi2指向一个空指针，并且释放空指针总是没有错误的
+    //释放一个const对象
+    const int *pci = new const int(1024);
+    delete pci;
+    //动态对象的生存周期直到被释放为止
+    /**
+     * 由shared_ptr管理的内存在最后一个shared_ptr销毁时会自动被释放掉，但是对于内置指针类型来管理的内存并不是这样。
+     * 对于一个由内置指针管理的动态对象，直到被显式释放之前都是存在的
+     */
+    /**
+     * 小心：动态内存的管理非常容易出错
+     * 使用new和delete管理动态内存存在三个常见问题：
+     * - 忘记delete内存。忘记释放动态内存常常会导致人们常说的"内存泄漏"问题，因为这种内存永远不可能被归还给自由空间了。查找内存泄漏是十分困难的
+     *   因为通常程序运行很长时间之后，真正耗尽内存时，才能检测得到这种错误
+     * - 使用已经释放掉的对象。通过在释放内存后将指针置为空，有时可以检测出这种错误
+     * - 同一块内存释放两次。当有有两个指针指向相同的动态分配对象时，可能发生这种错误。如果对其中一个指针进行了delete操作，对象的内存就被归怀给自由
+     *   空间了。如果我们随后又delete了第二个指针，自由空间就可能被破坏
+     */
+}
+/**
+ * delete之后重置指针值
+ * 当我们delete一个指针之后，指针值就会变为无效值了，虽然变成了无效值，但是很多机器时尚指针仍然保存着动态内存的地址，只不过delete之后
+ * 指针就变成了人们所说的空悬指针，即指向一块曾经保存数据对象但是现在已经无效的内存指针
+ */
+
 int main()
 {
     if (p1 && p1->empty())
@@ -168,6 +216,59 @@ int main()
      * - 程序不知道所需对象的准确类型
      * - 程序需要在多个对象之间共享数据
      */
+    /**
+     * 直接管理内存
+     * C++语言定义了两个运算符来分配和释放动态内存。
+     * - new用来分配内存
+     * - delete 释放new分配的内存
+     */
+    // int *pi = new int;
+    //此new表达式在自由空间构造一个int型对象，并返回指向该对象的指针
+    /**
+     * 默认情况下动态分配的对象是默认初始化的，这意味着内置类型或组合类型的对象的值将是未定义的·1，
+     * 而类类型对象用默认构造函数进行初始化
+     */
+    string *ps = new string;          //初始化为空string
+    int *pi = new int;                // pi指向一个·1未初始化的int
+    int *pi = new int(1024);          // pi指向的对象的值为1024
+    string *ps = new string(10, '9'); //*ps为"9999999999"s
+    // vector有十个元素，值依次从0到9
+    vector<int> *pv = new vector<int>{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    //也可以选择动态分配
+    string *ps1 = new string;   // 默认初始化为空string
+    string *ps2 = new string(); //值初始化为空string
+    int *pi1 = new int;         //默认初始化；pi1的值未定义
+    int *pi2 = new int();       //值初始化为0，pi2为0;
+    /**
+     * 对于定义了自己的构造函数的类类型来说，要求值初始化是没有意义的。因为不管采用什么形式的初始化，对象都会通过默认构造函数来初始化
+     * 但是对于内置类型，两种形式的差别非常大，值初始化的内置类型对象有着良好的定义的值，而默认初始化的对象的值则是未定义的。类似的，
+     * 对于类中那些依赖于编译器合成的默认构造函数的内置类型成员，如果它们未在类内被初始化，那么它们的值也是未定义的
+     */
+    auto p4 = new auto(*p1); // p指向一个与p1相同的对象
+    //动态分配的const对象
+    //分配并初始化一个const int
+    const int *pci = new const int(1024);
+    //分配并默认初始化一个const的空string
+    const string *pcs = new const string;
+    /**
+     * @brief 内存耗尽
+     * 虽然现代计算机通常配备有很大的内存，但是也是有可能在某些特定情况下被耗尽的，一旦耗尽内存，new表达式初始化就会失败
+     * 这时new就会抛出一个类型位bad_alloc的异常，我们可以改变使用new的方式来阻止抛出异常
+     */
+    //如果分配失败，new返回一个空指针
+    int *p1 = new int;           //如果分配失败，则会抛出std::bad_alloc
+    int *p2 = new (nothrow) int; //如果分配失败，则会返回一个空指针
+    //这种形式的new称为定位new
+    //定位new表达式允许我们向new传递额外参数。
 
+    /**
+     * @brief Shared_ptr 和new结合使用
+     *  如果我们不初始化一个智能指针，它就会初始化为一个空指针。
+     */
+    shared_ptr<double> ptest;            // shared_ptr 可以指向一个double
+    shared_ptr<int> ptest2(new int(42)); // ptest2指向一个值为42的int
+    //接受指针参数的智能指针构造函数是explicitr的。因此，我们不能将一个内置指针隐式的转换为一个智能指针，必须使用直接初始化形式
+    shared_ptr<int> ptest3(new int(1024)); //正确，使用了直接初始化的形式
+    
     return 0;
 }
