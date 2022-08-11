@@ -272,3 +272,7 @@ int main()
     
     return 0;
 }
+/**
+ * @brief 定义和改变shared
+ * 
+ */
