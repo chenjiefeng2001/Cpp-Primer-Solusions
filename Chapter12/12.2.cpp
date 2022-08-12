@@ -99,9 +99,33 @@ int main()
      * a.destroy(p)             p为T*类型的指针，此算法对p指向的对象执行析构函数
      */
     // allocator分配未构造的内存
-    auto p = test;  //q指向最后构造的元素之后的位置
-    alloc.construct(q++);
-    alloc.construct(q++,10,'c');
-
+    auto p = test; // q指向最后构造的元素之后的位置
+    alloc.construct(test2++);
+    alloc.construct(test2++, 10, 'c');
+    alloc.construct(test2++, "hi");
+    while (test2 != test)
+    {
+        alloc.destroy(--test2);
+        /* code
+         * 再循环开始处，q指向最后构造的元素之后的位置。我们在调用destroy之前对q进行了递减操作。因此
+         * 第一次调用destroy时，q指向最后一个构造的元素。在最后一步循环中，我们destroy了第一个构造元素，随后test2将与test相等，循环结束
+         * 我们只能对真正构造了的元素进行destroy操作
+         */
+    }
+    /**
+     * @brief allocator算法
+     * 这些函数在给定数目的位置创建元素，而不是由系统分配内存给它们
+     * uninitialized_copy(b,e,b2)       从迭代器b和e指出的输入范围中拷贝元素到迭代器b2指定的未构造的原始内存中。b2指向的内存必须足够大，能够容纳输入序列中元素的拷贝
+     * uninitialized_copy_n(b,n,b2)     从迭代器中b指向的元素开始，拷贝n个元素到b2开始的内存中
+     * uninitialized_fill(b,e,t)        在迭代器b和e指定的原始内存范围中创建对象，对象的值均为t的拷贝
+     * uninitialized_fill_n(b,n,t)      从迭代器b指向的内存地址开始创建n个对象。b必须指向足够大的未构造的原始内存，能够容纳给定数量的对象
+     */
+    vector<int> vi{1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
+    auto ptr = alloc.allocate(vi.size() * 2);
+    //通过拷贝vi中的元素来构造从ptr开始的元素
+    auto ptr2 = uninitialized_copy(vi.begin(), vi.end(), ptr);
+    //将剩余元素初始化为42
+    uninitialized_fill_n(ptr2, vi.size(), 42);
+    
     return 0;
 }
