@@ -10,6 +10,7 @@ using namespace std;
 class StrBlob
 {
 public:
+    std::shared_ptr<std::vector<std::string>> data;
     typedef std::vector<std::string>::size_type size_type;
     StrBlob(/* args */);
     StrBlob(std::initializer_list<std::string> il);
@@ -22,7 +23,7 @@ public:
     ~StrBlob();
 
 private:
-    std::shared_ptr<std::vector<std::string>> data;
+
     //如果data[i]不合法，则抛出一个异常
     void check(size_type i, const std::string &msg) const;
 };
