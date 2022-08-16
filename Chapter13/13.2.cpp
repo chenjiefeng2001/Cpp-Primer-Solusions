@@ -33,11 +33,16 @@ private:
  */
 HasPtr &HasPtr::operator=(const HasPtr &rhs)
 {
-    auto newp = new std::string(*rhs.ps); //从右侧运算对象拷贝数据到本对象
-    delete ps;                            //释放旧内存
-    ps = newp;                            //从右侧运算对象拷贝数据到本对象
-    i = rhs.i;
-    return *this; //返回本对象
+    ++*rhs.use;//递增右侧运算符运算对象的引用计数
+    if(--*use==0)
+    {
+        
+    }
+    // auto newp = new std::string(*rhs.ps); //从右侧运算对象拷贝数据到本对象
+    // delete ps;                            //释放旧内存
+    // ps = newp;                            //从右侧运算对象拷贝数据到本对象
+    // i = rhs.i;
+    // return *this; //返回本对象
     /**
      * @brief 赋值运算符
      * 当你编写赋值运算符时，有两点需要记住:
@@ -56,10 +61,27 @@ HasPtr &HasPtr::operator=(const HasPtr &rhs)
  * - 析构函数递减计数器，指出共享状态的用户少一个。如果计数器变为0，则析构函数释放状态。
  * - 拷贝赋值运算符递增右侧运算对象的计数器，递减左侧运算对象的计数器。如果左侧运算对象的计数器变为0，意味着它的共享状态没有用户了，考呗赋值运算符就必须销毁状态
  */
+HasPtr::~HasPtr()
+{
+    /**
+     * @brief 类指针的拷贝成员"篡改"引用计数
+     * 析构函数不能无条件地delete ps——可能还有其他对象指向这块内存。析构函数应该递减引用计数，指出共享string的对象少了一个。
+     * 如果计数器变为0，则析构函数释放ps和use指向的内存
+     * 
+     */
+    if (--*use == 0) //如果引用计数变为0
+    {
+        delete ps;  //释放string内存
+        delete use; //释放计数器内存
+        
+    }
+}
 using namespace std;
 int main()
 {
     HasPtr p1("Hiya!");
     HasPtr p2(p1); // p1和p2指向相同的string
-    HasPtr p2(p1); // p1,p2和p3都指向相同的string
+    HasPtr p3(p1); // p1,p2和p3都指向相同的string
+
+    return 0;
 }
