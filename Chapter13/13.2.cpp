@@ -82,6 +82,6 @@ int main()
     HasPtr p1("Hiya!");
     HasPtr p2(p1); // p1和p2指向相同的string
     HasPtr p3(p1); // p1,p2和p3都指向相同的string
-
+    
     return 0;
 }
