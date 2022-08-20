@@ -29,6 +29,23 @@ private:
     //从folder中的每个Folder中删除本Message
     void remove_from_Folders();
 };
+
+class Folder
+{
+    // folder用于增加和删除消息？
+public:
+    Folder() {}
+    ~Folder();
+    Folder addMsg() {}
+    Folder remMsg() {}
+
+private:
+};
+void Message::add_to_Folders(const Message &m)
+{
+    for (auto f : m.folders)
+        f->addMsg(this);
+}
 void Message::save(Folder &f)
 {
     folders.insert(&f);
@@ -50,17 +67,21 @@ Message &Message::operator=(const Message &rhs)
     add_to_Folders(rhs);     //将Message添加到那些Folder中
     return *this;
 }
-class Folder
+void swap(Message &lhs, Message &rhs)
 {
-    // folder用于增加和删除消息？
-public:
-    Folder() {}
-    ~Folder();
-    Folder addMsg() {}
-    Folder remMsg() {}
-
-private:
-};
+    using std::swap;
+    for (auto f : lhs.folders)
+        f->remMsg(&rhs);
+    for (auto f : rhs.folders)
+        f->remMsg(&rhs);
+    //交换contents和Folder指针set
+    swap(lhs.folders, rhs.folders);
+    swap(lhs.contents, rhs.contents);
+    for (auto f : lhs.folders)
+        f->addMsg(lhs);
+    for (auto f : rhs.folders)
+        f->addMsg(&rhs);
+}
 
 using namespace std;
 int main()
