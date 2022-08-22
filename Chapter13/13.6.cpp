@@ -9,9 +9,9 @@ public:
     StrVec() : elements(nullptr), first_free(nullptr), cap(nullptr) {} //显式初始化构造函数
     StrVec(StrVec &&);                                                 //移动构造函数
     StrVec(const StrVec &);                                            //拷贝构造函数
-    StrVec &operator=(const StrVec &);
-    StrVec &operator=(StrVec &&);  //拷贝赋值运算符
-    void push_back(const std::string &); //拷贝元素
+    StrVec &operator=(const StrVec &);                                 //拷贝赋值运算符
+    StrVec &operator=(StrVec &&);                                      //移动赋值运算符
+    void push_back(const std::string &);                               //拷贝元素
     size_t size() const { return first_free - elements; }
     size_t capacity() const { return cap - elements; }
     std::string *begin() const { return elements; }
@@ -88,15 +88,27 @@ StrVec &StrVec::operator=(const StrVec &rhs)
 StrVec &StrVec::operator=(StrVec &&rhs) noexcept
 {
     //直接检测自赋值
-    if(this!=&rhs)
+    if (this != &rhs)
     {
-        free();//释放已有的元素
-        elements=rhs.elements;//    从rhs接管资源
-        first_free=rhs.first_free;  
-        cap=rhs.cap;   
-        
+        free();                  //释放已有的元素
+        elements = rhs.elements; //    从rhs接管资源
+        first_free = rhs.first_free;
+        cap = rhs.cap;
+        rhs.elements = rhs.first_free = rhs.cap = nullptr;
     }
+    //在这里直接去检查了this指针与rhs的地址是否相同。如果相同，右侧和左侧运算对象指向相同的对象，我们无需做其他的任何事情。
+    //否则，我们释放左侧运算对象所使用的内存，并接管给定对象的内存
+    return *this;
 }
+/**
+ * @brief 移后源对象必须可析构
+ * 从一个对象移动数据并不会销毁此对象，但有时在移动操作完成之后，源对象会被销毁，因此，我们编写一个移动操作时，
+ * 必须确保移后源对象进入一个可析构的状态。
+ * 除了将移后源对象设置为析构安全的状态之外，移动操作还必须保证对象仍然是有效的。
+ *
+ *
+ */
+//在移动操作之后，移后源对象必须保持有效的、可析构的状态，但是用户不能对其值做任何的假设
 void StrVec::reallocate()
 {
     //我们将分配当前大小两倍的空间
@@ -144,6 +156,36 @@ StrVec::StrVec(StrVec &&s) noexcept : elements(s.elements), first_free(s.first_f
  * 潜在问题:移动一个对象通常会改变它的值，如果重新分配过程使用了移动构造函数，且在移动了部分而不是全部元素后抛出了一个异常
  * 就会产生问题。旧空间中的元素已经被改变了，而新空间中未构造的函数可能尚不存在。在此情况下，vector可能不能满足自身保持不变的要求
  */
+//合成的移动操作
+struct X
+{
+    int i;         //内置类型可以移动
+    std::string s; // string定义了自己的移动操作
+};
+struct hasX
+{
+    X mem;
+};
+X x, x2 = std::move(x);       //使用合成的移动构造函数
+hasX hx, hx2 = std::move(hx); //使用合成的移动构造函数
+/**
+ * 只有当一个类没有定义任何自己版本的拷贝控制成员，且它的所有数据成员都能移动构造或者移动赋值时，
+ * 编译器才会为它合成移动构造函数或移动赋值运算符
+ */
+/**
+ * 与拷贝构造函数不同，移动操作永远不会隐式地定义为删除的函数。但是，如果我们显式地要求编译器生成=default的移动操作，且编译器
+ * 不能移动所有成员，则编译器会将移动操作定义为删除的函数。除了第一个重要的例外，什么时候将合成的移动操作定义为删除的函数遵循与
+ * 定义删除合成拷贝操作类似的原则:
+ * - 与拷贝构造函数不同，移动构造函数被定义为删除的函数的条件时:有类成员定义了自己的拷贝狗战术且未定义移动构造函数，或者是有类成员未定义自己的
+ *   拷贝构造函数且编译器无法为其合成移动构造函数。移动赋值运算符的情况与移动构造函数类似
+ * - 如果有类成员的移动构造函数或者移动赋值运算符被定义为删除或者是不可访问的，则类的移动构造函数或移动赋值运算符将被定义为删除的
+ * - 类似拷贝构造函数，如果类的析构函数被定义为删除的或不可访问的，则eider移动构造函数被定义为删除的
+ * - 类似考呗赋值运算符，如果有类成员时const的或是引用，则类的移动赋值运算符被定义为删除的
+ *
+ * 移动操作和合成的拷贝控制成员还有最后一个相互作用的关系: 一个类是否定义了自己的移动操作对拷贝操作如何合成有影响。
+ * 定义了一个移动构造函数或移动赋值运算符的累必须定义了自己的拷贝操作。否则，这些成员默认地被定义为删除的
+ */
+
 using namespace std;
 int main()
 {
