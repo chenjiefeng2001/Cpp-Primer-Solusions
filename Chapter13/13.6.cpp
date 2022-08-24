@@ -3,6 +3,7 @@
 #include <string>
 #include <memory>
 #include <algorithm>
+#include <set>
 class StrVec
 {
 public:
@@ -16,6 +17,9 @@ public:
     size_t capacity() const { return cap - elements; }
     std::string *begin() const { return elements; }
     std::string *end() const { return first_free; }
+    void push_back(const std::string &); //拷贝元素
+    void push_back(std::string &&);      //移动元素
+
     ~StrVec();
 
 private:
@@ -201,13 +205,108 @@ public:
          * 如前所述，某些类必须定义拷贝构造函数、拷贝赋值运算符和析构函数才能正常工作。这些类通常拥有一个资源，而拷贝成员必须拥有此成员。
          * 一般来说，拷贝一个资源会导致一些额外的开销。在这种拷贝非必要的情况下，定义了移动构造函数和移动赋值运算符的累就可以避免此问题
          */
-        
     }
 
 private:
     int ps;
     int i;
 };
+/**
+ * @brief Message 类的移动操作
+ * 定义了自己的拷贝构造函数和拷贝赋值运算符的类通常也会从移动操作中受益。
+ *
+ */
+class Message
+{
+public:
+    // folder被隐式初始化为空集合
+    explicit Message(const std::string &str = " ") : contents(str) {}
+    //拷贝控制成员，用来管理指向本message的指针
+    Message(const Message &);
+    Message(Message &&);
+    Message &
+    operator=(const Message &);
+    Message &
+    operator=(Message &&);
+    ~Message();
+    //从给定的Folder中添加，删除本Message
+    void save(Folder &);
+    void remove(Folder &);
+    void move_Folders(Message *);
+
+private:
+    std::string contents;       //实际文本消息
+    std::set<Folder *> folders; //包含本Message的folder
+    //拷贝构造函数，拷贝赋值运算符和析构函数所使用的工具函数
+    //将本message添加到指向参数的folder中
+    void add_to_Folders(const Message &);
+    //从folder中的每个Folder中删除本Message
+    void remove_from_Folders();
+};
+class Folder
+{
+    // folder用于增加和删除消息？
+public:
+    Folder() {}
+    ~Folder();
+    Folder addMsg() {}
+    Folder remMsg() {}
+
+private:
+};
+void Message::move_Folders(Message *m)
+{
+    folders = std::move(m->folders);
+    for (auto f : folders)
+    {                //对每个folder
+        f->remMsg(); //从Folder中删除
+        f->addMsg(); //将本Message添加到Folder中
+    }
+    m->folders.clear(); //确保销毁m是无害的
+}
+void StrVec::push_back(const std::string &s)
+{
+    chk_n_alloc(); //确保有空间容纳新的元素
+    //在first_free指向的元素中构造s的一个副本
+    allocate.construct(first_free++, s);
+}
+void StrVec::push_back(std::string &&s)
+{
+    chk_n_alloc(); //确保有足够的空间
+    allocate.construct(first_free, std::move(s));
+}
+//这两个成员几乎都是相同的，差别在于右值引用版本使用了move函数来将其参数传递给construct
+/**
+ * @brief 移动迭代器
+ * 新标准库中定义了一种移动迭代器适配器
+ * 一个移动迭代器通过改变给定迭代器的解引用运算符的行为来适配次迭代器。一般来说，一个迭代器的解引用运算符返回一个元素的左值
+ * 与其他迭代器不同，移动迭代器的解引用运算生成一个右值引用
+ *
+ */
+Message::Message(Message &&m) : contents(std::move(m.contents))
+{
+    move_Folders(&m); //移动Folders并更新Folder是指针
+}
+Message &Message::operator=(Message &&rhs)
+{
+    if (this != &rhs)
+    {
+        remove_from_Folders();
+        contents = std::move(rhs.contents); //移动赋值运算符
+        move_Folders(&rhs);                 //重置Folders指向本Message
+    }
+    return *this;
+}
+/**
+ * @warning 不要随意使用移动操作
+ * 由于一个移后源对象具有不确定的状态，对其调用std::move是相当危险的。当我们调用move时，必须绝对确认移后源对象没有其他用户
+ * 通过在类代码中小心地使用move，可以大幅提升性能。而如果随意在普通用户代码(与类实现代码相对)中使用移动操作，很可能导致莫名
+ * 奇妙的、难以查找的错误，而难以提升应用程序的性能
+ */
+/**
+ * 除了构造函数和赋值运算符之外，如果一个成员函数同时提供拷贝和移动版本，它也能从中受益。这种允许移动的成员函数通常使用与
+ * 拷贝/移动构造函数和赋值运算符相同的参数模式——一个版本接受一个指向const的左值引用，第二个版本接受一个指向非const的右值引用
+ */
 using namespace std;
 int main()
 {
